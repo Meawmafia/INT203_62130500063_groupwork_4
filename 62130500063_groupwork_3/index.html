@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Vue Js - HelloWorld App</title>
+    <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+    <!-- Using via Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- https://tailwindcss.com/docs/installation -->
+    <!-- Using Tailwind via CDN -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+    <!-- Vue CDN -->
+    <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script>
+  <title>Basic Vue Js - HelloWorld App</title>
+</head>
+<body id="app">
+
+    <!-- Count -->
+    <div v-if="!isShowImg">
+    <p class="text-xl font-bold">Photo({{ calculate }}) </p>
+    <p class="text-xl font-bold">Favorite: ({{favCount}})</p>
+
+    <!-- search bar -->
+
+    <div class="flex justify-center my-10">
+    <div class="w-72 inline-flex space-x-2 mt-5 h-8">
+  <i class="border-4 border-indigo-600 w-48 cursor-pointer" @click="showSearchBox" v-show="!isShowSearchBox">search</i>
+   <input v-model="keyword" @keyup.enter="Search" type="text" v-if="isShowSearchBox" 
+   class="inline w-auto border-4 border-indigo-600 flex-1">
+   <button @click="Cancel" v-if="isShowSearchBox" class="bg-indigo-600 text-white rounded flex-1">cancel</button>
+  </div>
+</div>
+<!-- rose -->
+
+  <div v-for="(rose,index) in roses" class="flex justify-center my-5" :class="[rose.isHidden ? 'hidden' : '']">
+    <img class="w-72 mr-10 cursor-pointer" :src="rose.image" :alt="rose.name" :key="rose.name" @click="handleClickImg(index);">
+   
+    <p class="w-20 my-24">{{ rose.name }}</p>
+    <img :src="fav" v-if="rose.isFav" class="w-12 h-12 ml-10 my-20"  @click="updateFav(index)">
+    <img :src="unfav" v-else class="w-12 h-12 ml-10 my-20" @click="updateFav(index)">
+
+    
+</div>
+<p v-if="!isFound" class="flex justify-center"> Not found. </p>
+</div>
+<!-- preview -->
+<div class="bg-black bg-opacity-80 flex justify-center" v-else="isShowImg">
+  <div class="container  min-h-screen w-full flex flex-col h-full">
+      <i class="text-white self-end justify-self-center cursor-pointer mt-10 text-3xl border-4 border-white p-3" @click="Close">Close</i>
+      <div class="flex justify-center h-full items-center">
+          <img :src="currentImg" :alt="roses.name" class="w-2/4">
+      </div>
+  </div>
+</div>
+
+    
+      <!-- my main.js -->
+
+      <script src="./main.js"></script> 
+</body>
+</html>
